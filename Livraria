@@ -1,8 +1,6 @@
--- Criar Base de Dados
 CREATE DATABASE Livraria;
 USE Livraria;
 
--- Criar Tabelas
 CREATE TABLE Sessao (
     Codigo INT PRIMARY KEY,
     Descricao VARCHAR(50),
@@ -38,7 +36,6 @@ CREATE TABLE Emprestimo (
     FOREIGN KEY (Matricula) REFERENCES Leitor(Matricula)
 );
 
--- Inserir Dados
 INSERT INTO Sessao (Codigo, Descricao, Localizacao) VALUES
 (1, 'Ficção', 'A1'),
 (2, 'História', 'B2'),
@@ -57,15 +54,12 @@ INSERT INTO Emprestimo (Cod_Emprestimo, Cod_Livro, Matricula, Data_Emprestimo, D
 (1, 1, 1, '2024-10-01', '2024-10-15', NULL),
 (2, 3, 2, '2024-09-20', '2024-10-05', '2024-10-03');
 
--- Consultas com Joins
--- Listar Títulos dos Livros Emprestados por 'João Silva'
 SELECT l.Titulo, e.Data_Emprestimo
 FROM Emprestimo e
 INNER JOIN Livro l ON e.Cod_Livro = l.Cod_Livro
 INNER JOIN Leitor a ON e.Matricula = a.Matricula
 WHERE a.Nome LIKE 'João Silva';
 
--- Listar Livros por Sessão 'Tecnologia'
 SELECT l.Titulo
 FROM Livro l
 INNER JOIN Sessao s ON l.Cod_Sessao = s.Codigo
